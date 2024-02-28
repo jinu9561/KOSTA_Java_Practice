@@ -22,7 +22,6 @@ public class StudentTeacherDAOImpl implements StudentTeacherDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Student student = null;
 		List<Student> list = null;
 		String sql = "select * from student where student_jumin like ?";
 		
@@ -32,11 +31,12 @@ public class StudentTeacherDAOImpl implements StudentTeacherDAO {
 			
 			ps.setString(1, "'%-2%'");
 			
+			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				student = new Student(rs.getInt(1), rs.getString(2),
-						rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				Student student = new Student(rs.getInt(1), rs.getString("student_name"),
+						rs.getString("student_jumin"),rs.getString("student_phone"),rs.getString("student_address"),rs.getString("student_email"));
 				
 				list.add(student);
 			}
